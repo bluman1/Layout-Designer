@@ -1,69 +1,3 @@
-/*(function ($) {
-    "use strict"; // Start of use strict
-
-    // jQuery for page scrolling feature - requires jQuery Easing plugin
-    $('a.page-scroll').bind('click', function (event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: ($($anchor.attr('href')).offset().top - 50)
-        }, 1250, 'easeInOutExpo');
-        event.preventDefault();
-    });
- 
-    // Highlight the top nav as scrolling occurs
-    $('body').scrollspy({
-        target: '.navbar-fixed-top',
-        offset: 51
-    });
-
-    // Closes the Responsive Menu on Menu Item Click
-    $('.navbar-collapse ul li a').click(function () {
-        $('.navbar-toggle:visible').click();
-    });
-
-    // Offset for Main Navigation
-    $('#mainNav').affix({
-        offset: {
-            top: 100
-        }
-    })
-
-    // Initialize and Configure Scroll Reveal Animation
-    window.sr = ScrollReveal();
-    sr.reveal('.sr-icons', {
-        duration: 600,
-        scale: 0.3,
-        distance: '0px'
-    }, 200);
-    sr.reveal('.sr-button', {
-        duration: 1000,
-        delay: 200
-    });
-    sr.reveal('.sr-contact', {
-        duration: 600,
-        scale: 0.3,
-        distance: '0px'
-    }, 300);
-
-    // Initialize and Configure Magnific Popup Lightbox Plugin
-    $('.popup-gallery').magnificPopup({
-        delegate: 'a',
-        type: 'image',
-        tLoading: 'Loading image #%curr%...',
-        mainClass: 'mfp-img-mobile',
-        gallery: {
-            enabled: true,
-            navigateByImgClick: true,
-            preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-        },
-        image: {
-            tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
-        }
-    });
-
-})(jQuery); // End of use strict
-*/
-
 console.log(window.location.pathname)
 
 var containerCount = 1;
@@ -120,13 +54,18 @@ var rssProps = {
 
 $(document).ready(setupDesigner); //This calls the function that will setup the designer for editting if need be.
 
-//This sets up the designer for editting.
+/*This sets up the designer for editting.*/
 function setupDesigner() {
-    //we look at the path of the url and use it to determine if we are editing or creating a new layout
-    if (document.location.pathname == 'edit') {
-        //we nned to make an AJAX call here to pick up the XML of the previously designed layout here. we use the path of the url to know which layout needs editting
-        var stuff = '<?xml version="1.0" encoding="utf-8"?> <a> <Application backgroundImage="" backgoungColor="#dddddd" title=""> <Container top="10" left="127.125" width="744" height="106" backgroundColor="#408080"> <Playlist> <Video url="https://player.vimeo.com/video/141135097" time="240" expiryDate=""/><Image url="https://pbs.twimg.com/media/CzLJvsLUsAAcDq-.jpg" time="30" expiryDate=""/> <Video url="https://player.vimeo.com/video92827333" time="300" expiryDate=""/> <Website url="http://news.ycombincator.com" time="100" refreshTime="10" expiryDate=""/><Image url="https://pbs.twimg.com/media/CzLJvsLUsAAcDq-.jpg" time="1" expirtyDate=""/> <Image url="https://pbs.twimg.com/media/CzLJvsLUsAAcDq-.jpg" time="100" expirtyDate=""/> <Video url="https://player.vimeo.com/video/141135097" time="300" expiryDate=""/> </Playlist> </Container> <Container top="10" left="127.125" width="748" height="110" backgroundColor="#808080"> <Widget> <Clock type="Digital" country="Nigeria"/> </Widget> </Container> <Container top="10" left="127.125" width="748" height="110" backgroundColor="#808000"> <Widget> <Rss url="link" time="9" transition="Scroll Left" refreshTime="9"/> </Widget> </Container> <Container top="122" left="127.125" width="748" height="48" backgroundColor="#ff8000"> <Widget> <Weather country="Nigeria" type="undefined"/> </Widget> </Container> </Application> </a>';
-
+    /*we look at the path of the url and use it to determine if we are editing or creating a new layout.
+    So, assuming the url to create a new layout is 'glitzio.com/new/' then the following if statement will notbe executed.
+    But, if the action is to edit a layout, then let us assume that the URL will be 'glitzio.com/edit/layout_name/',
+    then the if statement should match a uRL pattern like that.
+    If you want to test this, just set the if statement to NOT match the URL.*/
+    if (document.location.pathname == '/edit/layout_name/') {
+        /*we nned to make an AJAX call here to pick up the XML of the previously designed layout here. we use the path of the url to know which layout needs editting*/
+        /*var stuff = '<?xml version="1.0" encoding="utf-8"?> <a> <Application backgroundImage="" backgoungColor="#dddddd" title=""> <Container top="10" left="127.125" width="744" height="106" backgroundColor="#408080"> <Playlist> <Video url="https://player.vimeo.com/video/141135097" time="240" expiryDate=""/><Image url="https://pbs.twimg.com/media/CzLJvsLUsAAcDq-.jpg" time="30" expiryDate=""/> <Video url="https://player.vimeo.com/video92827333" time="300" expiryDate=""/> <Website url="http://news.ycombincator.com" time="100" refreshTime="10" expiryDate=""/><Image url="https://pbs.twimg.com/media/CzLJvsLUsAAcDq-.jpg" time="1" expirtyDate=""/> <Image url="https://pbs.twimg.com/media/CzLJvsLUsAAcDq-.jpg" time="100" expirtyDate=""/> <Video url="https://player.vimeo.com/video/141135097" time="300" expiryDate=""/> </Playlist> </Container> <Container top="10" left="127.125" width="748" height="110" backgroundColor="#808080"> <Widget> <Clock type="Digital" country="Nigeria"/> </Widget> </Container> <Container top="10" left="127.125" width="748" height="110" backgroundColor="#808000"> <Widget> <Rss url="link" time="9" transition="Scroll Left" refreshTime="9"/> </Widget> </Container> <Container top="122" left="127.125" width="748" height="48" backgroundColor="#ff8000"> <Widget> <Weather country="Nigeria" type="undefined"/> </Widget> </Container> </Application> </a>';
+        */
+        /* The following variable is just for testing purposes. Ideally, we'll use the name of the layout from the URL to query the DB and get the XML of the layout to be edited. */
         var layout = '<Application backgroundImage="" backgoungColor="#ff0080" title="nm"> <Container top="10" left="127.125" width="744" height="44" backgroundColor="#8000ff"> <Widget> <Clock type="Digital" country="Nigeria"/> </Widget> </Container> <Container top="60" left="127.125" width="744" height="44" backgroundColor="#00ff00"> <Widget> <Rss url="bn " time="8" transition="Scroll Left" refreshTime="8"/> </Widget> </Container> <Container top="110" left="127.125" width="744" height="44" backgroundColor="#0080ff"> <Widget> <Weather country="Great Britain" type="F"/> </Widget> </Container> </Application>';
 
         var xmlDoc = $.parseXML(layout);
@@ -712,7 +651,9 @@ function saveLayout() {
         return;
     }
     var generatedXML = generateXML();
-    /*POST generatedXML here via AJAX and notify user in appropriate way.*/
+    /*POST generatedXML here via AJAX and notify user in appropriate way.
+    Remember, you need to use the Layout_Name entered by the user as an identifying key to save the generatedXML to the DB
+     because we will be using that to build the URL when a user is editing a layout.*/
 
     /* The next three lines displays the generatedXML on a new tab. This is only for testing purposes.*/
     var prettyprint = String(generatedXML).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
